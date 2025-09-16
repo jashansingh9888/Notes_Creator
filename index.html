@@ -3,128 +3,158 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Note Tracker with Riser Calculator</title>
+  <title>Note Tracker Updated</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <div class="container">
     <h1>Note Tracker</h1>
     <form id="noteForm">
-      <div class="form-group">
-        <label for="jobName">Job Name:</label>
-        <input type="text" id="jobName" required>
-      </div>
-      <div class="form-group">
-        <label for="date">Date:</label>
-        <input type="date" id="date" required>
-      </div>
+      <!-- Inside/Outside Tech -->
       <div class="form-group">
         <label for="insideTech">Inside Tech:</label>
-        <input type="text" id="insideTech">
+        <input type="text" id="insideTech" required>
       </div>
       <div class="form-group">
         <label for="outsideTech">Outside Tech:</label>
-        <input type="text" id="outsideTech">
+        <input type="text" id="outsideTech" required>
       </div>
+
+      <!-- Tests Completed -->
       <div class="form-group">
-        <label for="testsCompleted">Tests completed (Yes/No):</label>
-        <input type="text" id="testsCompleted">
+        <label>Tests Completed:</label>
+        <label><input type="checkbox" name="tests" value="Speed"> Speed</label>
+        <label><input type="checkbox" name="tests" value="Exfo"> Exfo</label>
+        <label><input type="checkbox" name="tests" value="Light"> Light</label>
+        <label><input type="checkbox" name="tests" value="Fluke"> Fluke</label>
       </div>
-      <div class="form-group">
-        <label for="rubyRiser">Ruby (if riser was visited):</label>
-        <input type="text" id="rubyRiser">
-      </div>
-      <div class="form-group">
-        <label for="exfo">Exfo:</label>
-        <input type="text" id="exfo">
-      </div>
-      <div class="form-group">
-        <label for="lightMeter">Light meter:</label>
-        <input type="text" id="lightMeter">
-      </div>
-      <div class="form-group">
-        <label for="wifi">WiFi:</label>
-        <input type="text" id="wifi">
-      </div>
+
+      <!-- Zhone Information -->
+      <h3>Zhone Information</h3>
       <div class="form-group">
         <label for="zhoneLocation">Zhone Location:</label>
-        <input type="text" id="zhoneLocation">
+        <select id="zhoneLocation">
+          <option value="Closet">Closet</option>
+          <option value="Smart Panel">Smart Panel</option>
+          <option value="Living Room">Living Room</option>
+          <option value="Bedroom">Bedroom</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="text" id="zhoneLocationOther" placeholder="If Other, specify">
       </div>
       <div class="form-group">
         <label for="zhoneMAC">Zhone MAC:</label>
-        <input type="text" id="zhoneMAC">
+        <input type="text" id="zhoneMAC" placeholder="XX:XX:XX:XX:XX:XX">
       </div>
       <div class="form-group">
         <label for="zhoneModel">Zhone Model:</label>
-        <input type="text" id="zhoneModel">
+        <select id="zhoneModel">
+          <option value="5222XG">5222XG</option>
+          <option value="2424GN">2424GN</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="text" id="zhoneModelOther" placeholder="If Other, specify">
       </div>
+
+      <!-- Airties Information -->
+      <h3>Airties Information</h3>
       <div class="form-group">
         <label for="airtiesLocation">Airties Location:</label>
-        <input type="text" id="airtiesLocation">
+        <select id="airtiesLocation">
+          <option value="Closet">Closet</option>
+          <option value="Living Room">Living Room</option>
+          <option value="Bedroom">Bedroom</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="text" id="airtiesLocationOther" placeholder="If Other, specify">
       </div>
       <div class="form-group">
         <label for="airtiesMAC">Airties MAC:</label>
-        <input type="text" id="airtiesMAC">
+        <input type="text" id="airtiesMAC" placeholder="XX:XX:XX:XX:XX:XX">
       </div>
       <div class="form-group">
         <label for="airtiesModel">Airties Model:</label>
-        <input type="text" id="airtiesModel">
+        <select id="airtiesModel">
+          <option value="Air4960X">Air4960X</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="text" id="airtiesModelOther" placeholder="If Other, specify">
+      </div>
+
+      <!-- Terminations -->
+      <h3>In-Suite CAT5</h3>
+      <div class="form-group">
+        <label for="rj45Terminated">RJ45's Terminated:</label>
+        <input type="number" id="rj45Terminated" value="0">
       </div>
       <div class="form-group">
-        <label for="airtiesClosetAdvised">If Airties was left in closet, was customer advised?:</label>
-        <input type="text" id="airtiesClosetAdvised">
+        <label for="totalCat5">Total CAT5 Lines in Unit:</label>
+        <input type="number" id="totalCat5" value="0">
       </div>
       <div class="form-group">
-        <label for="linesTerminated">?/?. Lines terminated, fluked, plugged into Zhone:</label>
-        <input type="text" id="linesTerminated">
+        <label for="terminatedRoom">Add Terminated Room:</label>
+        <select id="terminatedRoom">
+          <option value="Lobby">Lobby</option>
+          <option value="Living Room">Living Room</option>
+          <option value="Bedroom">Bedroom</option>
+          <option value="Kitchen">Kitchen</option>
+          <option value="Other">Other</option>
+        </select>
+        <input type="text" id="terminatedRoomOther" placeholder="If Other, specify">
+        <input type="number" id="terminatedQty" placeholder="Quantity">
+        <button type="button" id="addRoom">Add Room</button>
+      </div>
+      <ul id="roomList"></ul>
+
+      <!-- Panel Information -->
+      <h3>Panel Information</h3>
+      <div class="form-group">
+        <label for="floor">Floor:</label>
+        <input type="text" id="floor">
       </div>
       <div class="form-group">
-        <label for="locations">Locations:</label>
-        <input type="text" id="locations">
+        <label for="panel">Panel:</label>
+        <input type="text" id="panel">
       </div>
       <div class="form-group">
-        <label for="returnVisitCharge">Was customer notified of $100 return visit charge?</label>
-        <input type="text" id="returnVisitCharge">
+        <label for="port">Port:</label>
+        <input type="text" id="port">
       </div>
+
+      <!-- Fiber Meter -->
+      <h3>Fibre Meter Mark</h3>
       <div class="form-group">
-        <label for="airtiesReason">Reason for Airties being in closet or not terminating Cat5s:</label>
-        <input type="text" id="airtiesReason">
-      </div>
-      <div class="form-group">
-        <label for="floorPanelPort">Floor/Panel/Port info:</label>
-        <input type="text" id="floorPanelPort">
-      </div>
-      <div class="form-group">
-        <label for="riserValue">Fiber Meter Riser (m):</label>
-        <input type="number" id="riserValue" value="0">
-      </div>
-      <div class="form-group">
-        <label for="suiteValue">Fiber Meter Suite (m):</label>
+        <label for="suiteValue">Suite (m):</label>
         <input type="number" id="suiteValue" value="0">
       </div>
       <div class="form-group">
-        <label for="totalValue">Fiber Meter Total (m):</label>
-        <input type="number" id="totalValue" value="0">
+        <label for="riserValue">Riser (m):</label>
+        <input type="number" id="riserValue" value="0">
       </div>
       <div class="form-group">
-        <label for="riserResult">Calculated Riser Mark (always positive):</label>
-        <input type="number" id="riserResult" readonly>
+        <label for="totalValue">Total (m):</label>
+        <input type="number" id="totalValue" readonly>
       </div>
-      <button type="button" id="calculateRiser">Calculate Riser</button>
+      <button type="button" id="calculateRiser">Calculate Total</button>
+
+      <!-- Hub Stock -->
       <div class="form-group">
-        <label for="hubStockLocation">Hub Stock Location:</label>
+        <label for="hubStockLocation">Hub Stock Inventory:</label>
         <input type="text" id="hubStockLocation">
       </div>
+
+      <!-- Material List -->
+      <h3>Material List</h3>
       <div class="form-group">
-        <label for="additionalNotes">Additional notes:</label>
-        <textarea id="additionalNotes" rows="3"></textarea>
+        <input type="text" id="materialCode" placeholder="Material Code">
+        <input type="number" id="materialQty" placeholder="Qty">
+        <button type="button" id="addMaterial">Add Material</button>
       </div>
-      <div class="form-group">
-        <label for="materialsSelect">Material list:</label>
-        <select id="materialsSelect" multiple size="5"></select>
-      </div>
+      <ul id="materialList"></ul>
+
       <button type="button" id="generateBtn">Generate Note</button>
     </form>
+
     <h2>Generated Note</h2>
     <pre id="outputArea"></pre>
   </div>
