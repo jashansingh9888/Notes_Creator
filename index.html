@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Note Tracker with Riser Calculator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Note Tracker</h1>
+    <form id="noteForm">
+      <div class="form-group">
+        <label for="jobName">Job Name:</label>
+        <input type="text" id="jobName" required>
+      </div>
+      <div class="form-group">
+        <label for="date">Date:</label>
+        <input type="date" id="date" required>
+      </div>
+      <div class="form-group">
+        <label for="insideTech">Inside Tech:</label>
+        <input type="text" id="insideTech">
+      </div>
+      <div class="form-group">
+        <label for="outsideTech">Outside Tech:</label>
+        <input type="text" id="outsideTech">
+      </div>
+      <div class="form-group">
+        <label for="testsCompleted">Tests completed (Yes/No):</label>
+        <input type="text" id="testsCompleted">
+      </div>
+      <div class="form-group">
+        <label for="rubyRiser">Ruby (if riser was visited):</label>
+        <input type="text" id="rubyRiser">
+      </div>
+      <div class="form-group">
+        <label for="exfo">Exfo:</label>
+        <input type="text" id="exfo">
+      </div>
+      <div class="form-group">
+        <label for="lightMeter">Light meter:</label>
+        <input type="text" id="lightMeter">
+      </div>
+      <div class="form-group">
+        <label for="wifi">WiFi:</label>
+        <input type="text" id="wifi">
+      </div>
+      <div class="form-group">
+        <label for="zhoneLocation">Zhone Location:</label>
+        <input type="text" id="zhoneLocation">
+      </div>
+      <div class="form-group">
+        <label for="zhoneMAC">Zhone MAC:</label>
+        <input type="text" id="zhoneMAC">
+      </div>
+      <div class="form-group">
+        <label for="zhoneModel">Zhone Model:</label>
+        <input type="text" id="zhoneModel">
+      </div>
+      <div class="form-group">
+        <label for="airtiesLocation">Airties Location:</label>
+        <input type="text" id="airtiesLocation">
+      </div>
+      <div class="form-group">
+        <label for="airtiesMAC">Airties MAC:</label>
+        <input type="text" id="airtiesMAC">
+      </div>
+      <div class="form-group">
+        <label for="airtiesModel">Airties Model:</label>
+        <input type="text" id="airtiesModel">
+      </div>
+      <div class="form-group">
+        <label for="airtiesClosetAdvised">If Airties was left in closet, was customer advised?:</label>
+        <input type="text" id="airtiesClosetAdvised">
+      </div>
+      <div class="form-group">
+        <label for="linesTerminated">?/?. Lines terminated, fluked, plugged into Zhone:</label>
+        <input type="text" id="linesTerminated">
+      </div>
+      <div class="form-group">
+        <label for="locations">Locations:</label>
+        <input type="text" id="locations">
+      </div>
+      <div class="form-group">
+        <label for="returnVisitCharge">Was customer notified of $100 return visit charge?</label>
+        <input type="text" id="returnVisitCharge">
+      </div>
+      <div class="form-group">
+        <label for="airtiesReason">Reason for Airties being in closet or not terminating Cat5s:</label>
+        <input type="text" id="airtiesReason">
+      </div>
+      <div class="form-group">
+        <label for="floorPanelPort">Floor/Panel/Port info:</label>
+        <input type="text" id="floorPanelPort">
+      </div>
+      <div class="form-group">
+        <label for="riserValue">Fiber Meter Riser (m):</label>
+        <input type="number" id="riserValue" value="0">
+      </div>
+      <div class="form-group">
+        <label for="suiteValue">Fiber Meter Suite (m):</label>
+        <input type="number" id="suiteValue" value="0">
+      </div>
+      <div class="form-group">
+        <label for="totalValue">Fiber Meter Total (m):</label>
+        <input type="number" id="totalValue" value="0">
+      </div>
+      <div class="form-group">
+        <label for="riserResult">Calculated Riser Mark (always positive):</label>
+        <input type="number" id="riserResult" readonly>
+      </div>
+      <button type="button" id="calculateRiser">Calculate Riser</button>
+      <div class="form-group">
+        <label for="hubStockLocation">Hub Stock Location:</label>
+        <input type="text" id="hubStockLocation">
+      </div>
+      <div class="form-group">
+        <label for="additionalNotes">Additional notes:</label>
+        <textarea id="additionalNotes" rows="3"></textarea>
+      </div>
+      <div class="form-group">
+        <label for="materialsSelect">Material list:</label>
+        <select id="materialsSelect" multiple size="5"></select>
+      </div>
+      <button type="button" id="generateBtn">Generate Note</button>
+    </form>
+    <h2>Generated Note</h2>
+    <pre id="outputArea"></pre>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>

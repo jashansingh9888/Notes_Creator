@@ -1,0 +1,26 @@
+==== Job Summary ====
+Job: {{jobName}}
+Date: {{date}}
+Inside Tech: {{insideTech}}
+Outside Tech: {{outsideTech}}
+Tests completed: {{testsCompleted}}
+Ruby (if riser was visited): {{rubyRiser}}
+Exfo: {{exfo}}
+Light meter: {{lightMeter}}
+WiFi: {{wifi}}
+Zhone Location: {{zhoneLocation}}
+Zhone MAC: {{zhoneMAC}}
+Zhone Model: {{zhoneModel}}
+Airties Location: {{airtiesLocation}}
+Airties MAC: {{airtiesMAC}}
+Airties Model: {{airtiesModel}}
+If Airties left in closet, advised?: {{airtiesClosetAdvised}}
+?/?. Lines terminated, fluked, plugged into Zhone: {{linesTerminated}}
+Locations: {{locations}}
+Return visit charge notified?: {{returnVisitCharge}}
+Reason for Airties: {{airtiesReason}}
+Floor/Panel/Port info: {{floorPanelPort}}
+Fiber meter Riser={{riserValue}}, Suite={{suiteValue}}, Total={{totalValue}}, Calculated={{riserResult}}
+Hub Stock Location: {{hubStockLocation}}
+Material list: {{materials}}
+Additional notes: {{additionalNotes}}
