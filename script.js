@@ -1,123 +1,166 @@
-document.addEventListener("DOMContentLoaded", () => {
-  const outputArea = document.getElementById("outputArea");
-  const roomList = document.getElementById("roomList");
-  const materialList = document.getElementById("materialList");
+
+document.addEventListener('DOMContentLoaded', ()=>{
+  // helpers
+  const fmtMAC = (s)=>{
+    if(!s) return '';
+    const clean = s.replace(/[^a-fA-F0-9]/g,'').toUpperCase();
+    return clean.match(/.{1,2}/g)?.join(':')||s;
+  };
+  const validateMAC = (s)=>/^([0-9A-F]{2}:){5}[0-9A-F]{2}$/.test(s);
+
+  // elements
+  const zhoneMAC = document.getElementById('zhoneMAC');
+  const airtiesMAC = document.getElementById('airtiesMAC');
+  const calculateRiserBtn = document.getElementById('calculateRiser');
+  const generateBtn = document.getElementById('generateBtn');
+  const copyBtn = document.getElementById('copyBtn');
+  const outputArea = document.getElementById('outputArea');
+  const roomList = document.getElementById('roomList');
+  const addRoomBtn = document.getElementById('addRoom');
+  const terminatedQty = document.getElementById('terminatedQty');
+  const rj45Terminated = document.getElementById('rj45Terminated');
+  const totalCat5 = document.getElementById('totalCat5');
+  const roomSelect = document.getElementById('terminatedRoomSelect');
+  const materialSelect = document.getElementById('materialSelect');
+  const materialList = document.getElementById('materialList');
+  const addMaterialBtn = document.getElementById('addMaterial');
+  const materialQty = document.getElementById('materialQty');
+
   let rooms = [];
   let materials = [];
 
-  // Add Room
-  document.getElementById("addRoom").addEventListener("click", ()=>{
-    let room = document.getElementById("terminatedRoom").value;
-    if(room==="Other") room = document.getElementById("terminatedRoomOther").value;
-    let qty = parseInt(document.getElementById("terminatedQty").value)||0;
-    if(room && qty>0){
-      rooms.push({room, qty});
-      renderRooms();
-    }
+  // auto-format MAC on blur
+  zhoneMAC.addEventListener('blur', ()=>{ zhoneMAC.value = fmtMAC(zhoneMAC.value); if(zhoneMAC.value && !validateMAC(zhoneMAC.value)) alert('Zhone MAC format looks incorrect'); });
+  airtiesMAC.addEventListener('blur', ()=>{ airtiesMAC.value = fmtMAC(airtiesMAC.value); if(airtiesMAC.value && !validateMAC(airtiesMAC.value)) alert('Airties MAC format looks incorrect'); });
+
+  // add room button
+  addRoomBtn.addEventListener('click', ()=>{
+    let room = roomSelect.value;
+    if(room === 'Other') room = document.getElementById('terminatedRoomOther').value || 'Other';
+    const qty = parseInt(terminatedQty.value)||0;
+    if(!room || qty<=0){ alert('Enter room and qty'); return; }
+    for(let i=0;i<qty;i++){ rooms.push({room}); }
+    renderRooms();
   });
 
   function renderRooms(){
-    roomList.innerHTML="";
-    rooms.forEach(r=>{
-      const li=document.createElement("li");
-      li.textContent = `${r.room}: ${r.qty}`;
+    roomList.innerHTML = '';
+    rooms.forEach((r,idx)=>{
+      const li = document.createElement('li');
+      li.textContent = r.room + ' (1)';
+      const btn = document.createElement('button');
+      btn.textContent = 'Remove'; btn.type='button';
+      btn.style.marginLeft='8px';
+      btn.addEventListener('click', ()=>{ rooms.splice(idx,1); renderRooms(); });
+      li.appendChild(btn);
       roomList.appendChild(li);
     });
   }
 
-  // Add Material
-  document.getElementById("addMaterial").addEventListener("click", ()=>{
-    let code = document.getElementById("materialCode").value.trim();
-    let qty = parseInt(document.getElementById("materialQty").value)||0;
-    if(code && qty>0){
-      materials.push({code, qty});
-      renderMaterials();
-    }
+  // handle RJ45 terminated auto-rooms
+  rj45Terminated.addEventListener('change', ()=>{
+    const n = parseInt(rj45Terminated.value)||0;
+    rooms = [];
+    for(let i=0;i<n;i++) rooms.push({room:'Unit-Terminated'});
+    renderRooms();
+  });
+
+  // add material
+  addMaterialBtn.addEventListener('click', ()=>{
+    const code = materialSelect.value;
+    const qty = parseInt(materialQty.value)||0;
+    if(!code || qty<=0){ alert('Select material and qty'); return; }
+    materials.push({code,qty});
+    renderMaterials();
   });
 
   function renderMaterials(){
-    materialList.innerHTML="";
-    materials.forEach(m=>{
-      const li=document.createElement("li");
-      li.textContent = `${m.code}: ${m.qty}`;
+    materialList.innerHTML='';
+    materials.forEach((m,idx)=>{
+      const li=document.createElement('li');
+      li.textContent = m.code + ' - ' + m.qty;
+      const btn=document.createElement('button'); btn.type='button'; btn.textContent='Remove';
+      btn.style.marginLeft='8px';
+      btn.addEventListener('click', ()=>{ materials.splice(idx,1); renderMaterials(); });
+      li.appendChild(btn);
       materialList.appendChild(li);
     });
   }
 
-  // Calculate Riser
-  document.getElementById("calculateRiser").addEventListener("click", ()=>{
-    const suite = parseFloat(document.getElementById("suiteValue").value)||0;
-    const riser = parseFloat(document.getElementById("riserValue").value)||0;
-    document.getElementById("totalValue").value = Math.abs(suite - riser);
+  // calculate riser total
+  calculateRiserBtn.addEventListener('click', ()=>{
+    const suite = Math.abs(parseFloat(document.getElementById('suiteValue').value)||0);
+    const riser = Math.abs(parseFloat(document.getElementById('riserValue').value)||0);
+    const total = Math.abs(suite - riser);
+    document.getElementById('totalValue').value = Math.round(total);
   });
 
-  // MAC validation
-  function validateMAC(mac){
-    return /^([0-9A-Fa-f]{2}:){5}[0-9A-Fa-f]{2}$/.test(mac);
-  }
+  // generate note
+  generateBtn.addEventListener('click', ()=>{
+    const inside = document.getElementById('insideTech').value.trim();
+    const outside = document.getElementById('outsideTech').value.trim();
+    const tests = Array.from(document.querySelectorAll('input[name="tests"]:checked')).map(i=>i.value).join(', ') || 'None';
+    let zLoc = document.getElementById('zhoneLocation').value;
+    if(zLoc==='Other') zLoc = document.getElementById('zhoneLocationOther').value || 'Other';
+    const zMAC = document.getElementById('zhoneMAC').value.trim();
+    let zModel = document.getElementById('zhoneModel').value; if(zModel==='Other') zModel=document.getElementById('zhoneModelOther').value||'Other';
+    let aLoc = document.getElementById('airtiesLocation').value; if(aLoc==='Other') aLoc = document.getElementById('airtiesLocationOther').value||'Other';
+    const aMAC = document.getElementById('airtiesMAC').value.trim();
+    let aModel = document.getElementById('airtiesModel').value; if(aModel==='Other') aModel=document.getElementById('airtiesModelOther').value||'Other';
+    const rj45 = parseInt(document.getElementById('rj45Terminated').value)||0;
+    const totalCat = parseInt(document.getElementById('totalCat5').value)||0;
+    const panel = `Floor: ${document.getElementById('floor').value||'—'}, Panel: ${document.getElementById('panel').value||'—'}, Port: ${document.getElementById('port').value||'—'}`;
+    const suite = parseFloat(document.getElementById('suiteValue').value)||0;
+    const riser = parseFloat(document.getElementById('riserValue').value)||0;
+    const total = Math.round(Math.abs(suite - riser));
+    const hub = document.getElementById('hubStock').value;
+    // rooms summary
+    const roomsSummary = rooms.reduce((acc,cur)=>{ acc[cur.room]=(acc[cur.room]||0)+1; return acc; },{});
+    // materials summary
+    const materialsSummary = materials.map(m=>`${m.code} - ${m.qty}`).join('\n') || 'None';
 
-  // Generate Note
-  document.getElementById("generateBtn").addEventListener("click", ()=>{
-    let insideTech = document.getElementById("insideTech").value;
-    let outsideTech = document.getElementById("outsideTech").value;
+    // termination phrasing e.g. "1/3 lines were terminated and 1/3 plugged into the Zhone and 1 lines fluked as per customer request."
+    const terminatedPhr = `${rj45}/${totalCat} lines were terminated and ${rj45}/${totalCat} plugged into the Zhone and ${Math.max(0,totalCat - rj45)} lines fluked as per customer request.`;
 
-    let tests = Array.from(document.querySelectorAll("input[name='tests']:checked")).map(c=>c.value).join(", ");
-
-    let zhoneLocation = document.getElementById("zhoneLocation").value;
-    if(zhoneLocation==="Other") zhoneLocation=document.getElementById("zhoneLocationOther").value;
-    let zhoneMAC = document.getElementById("zhoneMAC").value;
-    if(zhoneMAC && !validateMAC(zhoneMAC)){alert("Invalid Zhone MAC!"); return;}
-    let zhoneModel = document.getElementById("zhoneModel").value;
-    if(zhoneModel==="Other") zhoneModel=document.getElementById("zhoneModelOther").value;
-
-    let airtiesLocation=document.getElementById("airtiesLocation").value;
-    if(airtiesLocation==="Other") airtiesLocation=document.getElementById("airtiesLocationOther").value;
-    let airtiesMAC=document.getElementById("airtiesMAC").value;
-    if(airtiesMAC && !validateMAC(airtiesMAC)){alert("Invalid Airties MAC!"); return;}
-    let airtiesModel=document.getElementById("airtiesModel").value;
-    if(airtiesModel==="Other") airtiesModel=document.getElementById("airtiesModelOther").value;
-
-    let rj45=document.getElementById("rj45Terminated").value;
-    let totalCat5=document.getElementById("totalCat5").value;
-    let panelInfo=`Floor: ${document.getElementById("floor").value}, Panel: ${document.getElementById("panel").value}, Port: ${document.getElementById("port").value}`;
-
-    let suite=document.getElementById("suiteValue").value;
-    let riser=document.getElementById("riserValue").value;
-    let total=document.getElementById("totalValue").value;
-
-    let hubStock=document.getElementById("hubStockLocation").value;
-
-    let note = `Inside Installer: ${insideTech}
-Outside Installer: ${outsideTech}
+    let note = `Inside Installer: ${inside}
+Outside Installer: ${outside}
 
 Tests completed: ${tests}
 
-Zhone Location: ${zhoneLocation}
-Zhone MAC: ${zhoneMAC}
-Zhone Model: ${zhoneModel}
+Zhone location : ${zLoc}
+Zhone MAC : ${zMAC}
+Zhone Model : ${zModel}
 
-Airties Location: ${airtiesLocation}
-Airties MAC: ${airtiesMAC}
-Airties Model: ${airtiesModel}
+Airties Location: ${aLoc}
+Airties MAC : ${aMAC}
+Airties Model : ${aModel}
 
-RJ45's Terminated: ${rj45}
-Total CAT5 Lines in Unit: ${totalCat5}
+${terminatedPhr}
+
 Terminated Rooms:`;
-    rooms.forEach(r=>{note += `\n- ${r.room}: ${r.qty}`});
+    Object.keys(roomsSummary).forEach(k=>{ note += `\n- ${k}: ${roomsSummary[k]}`; });
 
     note += `
 
 Panel Information:
-${panelInfo}
+${panel}
 
 Fibre Meter Mark:
-Suite = ${suite} m, Riser = ${riser} m, Total = ${total} m
+Suite = ${suite} m, Riser = ${riser} m, Total = ${total} metres
 
-Hub Stock Inventory: ${hubStock}
+Hub Stock Inventory:- ${hub}
 
-Material List:`;
-    materials.forEach(m=>{note += `\n- ${m.code}: ${m.qty}`});
+Material list:-
+${materialsSummary}
 
-    outputArea.textContent=note;
+----`;
+
+    outputArea.textContent = note;
   });
+
+  // copy button
+  copyBtn.addEventListener('click', ()=>{
+    navigator.clipboard.writeText(outputArea.textContent).then(()=>{ alert('Copied to clipboard'); }, ()=>{ alert('Copy failed'); });
+  });
+
 });

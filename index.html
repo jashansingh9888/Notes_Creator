@@ -1,163 +1,140 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Note Tracker Updated</title>
-  <link rel="stylesheet" href="styles.css">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Note Tracker Modern</title>
+<link href="styles.css" rel="stylesheet">
 </head>
 <body>
-  <div class="container">
-    <h1>Note Tracker</h1>
-    <form id="noteForm">
-      <!-- Inside/Outside Tech -->
-      <div class="form-group">
-        <label for="insideTech">Inside Tech:</label>
-        <input type="text" id="insideTech" required>
-      </div>
-      <div class="form-group">
-        <label for="outsideTech">Outside Tech:</label>
-        <input type="text" id="outsideTech" required>
-      </div>
-
-      <!-- Tests Completed -->
-      <div class="form-group">
-        <label>Tests Completed:</label>
-        <label><input type="checkbox" name="tests" value="Speed"> Speed</label>
-        <label><input type="checkbox" name="tests" value="Exfo"> Exfo</label>
+<main class="card">
+  <h1>Note Tracker</h1>
+  <form id="noteForm" class="grid">
+    <section>
+      <label>Inside Installer<input type="text" id="insideTech" required></label>
+      <label>Outside Installer<input type="text" id="outsideTech" required></label>
+      <fieldset class="tests">
+        <legend>Tests Completed</legend>
         <label><input type="checkbox" name="tests" value="Light"> Light</label>
         <label><input type="checkbox" name="tests" value="Fluke"> Fluke</label>
-      </div>
+        <label><input type="checkbox" name="tests" value="Exfo"> Exfo</label>
+        <label><input type="checkbox" name="tests" value="WiFi"> WiFi</label>
+        <label><input type="checkbox" name="tests" value="Speed"> Speed</label>
+      </fieldset>
+    </section>
 
-      <!-- Zhone Information -->
-      <h3>Zhone Information</h3>
-      <div class="form-group">
-        <label for="zhoneLocation">Zhone Location:</label>
+    <section>
+      <h2>Zhone Information</h2>
+      <label>Location
         <select id="zhoneLocation">
-          <option value="Closet">Closet</option>
-          <option value="Smart Panel">Smart Panel</option>
-          <option value="Living Room">Living Room</option>
-          <option value="Bedroom">Bedroom</option>
-          <option value="Other">Other</option>
+          <option>Smart Panel</option>
+          <option>Hatch</option>
+          <option>Living Room</option>
+          <option>Den</option>
+          <option>Bedroom</option>
+          <option>Other</option>
         </select>
-        <input type="text" id="zhoneLocationOther" placeholder="If Other, specify">
-      </div>
-      <div class="form-group">
-        <label for="zhoneMAC">Zhone MAC:</label>
-        <input type="text" id="zhoneMAC" placeholder="XX:XX:XX:XX:XX:XX">
-      </div>
-      <div class="form-group">
-        <label for="zhoneModel">Zhone Model:</label>
+      </label>
+      <input id="zhoneLocationOther" placeholder="If Other, specify">
+      <label>MAC (Zhone)<input id="zhoneMAC" placeholder="XX:XX:XX:XX:XX:XX"></label>
+      <label>Model
         <select id="zhoneModel">
-          <option value="5222XG">5222XG</option>
-          <option value="2424GN">2424GN</option>
-          <option value="Other">Other</option>
+          <option>2424GN</option><option>5222XG</option><option>2424A</option><option>2424A1</option><option>2628A</option><option>Other</option>
         </select>
-        <input type="text" id="zhoneModelOther" placeholder="If Other, specify">
-      </div>
+      </label>
+      <input id="zhoneModelOther" placeholder="If Other, specify">
+    </section>
 
-      <!-- Airties Information -->
-      <h3>Airties Information</h3>
-      <div class="form-group">
-        <label for="airtiesLocation">Airties Location:</label>
+    <section>
+      <h2>Airties Information</h2>
+      <label>Location
         <select id="airtiesLocation">
-          <option value="Closet">Closet</option>
-          <option value="Living Room">Living Room</option>
-          <option value="Bedroom">Bedroom</option>
-          <option value="Other">Other</option>
+          <option>Smart Panel</option>
+          <option>Hatch</option>
+          <option>Living Room</option>
+          <option>Den</option>
+          <option>Bedroom</option>
+          <option>Other</option>
         </select>
-        <input type="text" id="airtiesLocationOther" placeholder="If Other, specify">
-      </div>
-      <div class="form-group">
-        <label for="airtiesMAC">Airties MAC:</label>
-        <input type="text" id="airtiesMAC" placeholder="XX:XX:XX:XX:XX:XX">
-      </div>
-      <div class="form-group">
-        <label for="airtiesModel">Airties Model:</label>
+      </label>
+      <input id="airtiesLocationOther" placeholder="If Other, specify">
+      <label>MAC (Airties)<input id="airtiesMAC" placeholder="XX:XX:XX:XX:XX:XX"></label>
+      <label>Model
         <select id="airtiesModel">
-          <option value="Air4960X">Air4960X</option>
-          <option value="Other">Other</option>
+          <option>4960x</option><option>4960</option><option>4930</option><option>4920</option><option>Other</option>
         </select>
-        <input type="text" id="airtiesModelOther" placeholder="If Other, specify">
-      </div>
+      </label>
+      <input id="airtiesModelOther" placeholder="If Other, specify">
+    </section>
 
-      <!-- Terminations -->
-      <h3>In-Suite CAT5</h3>
-      <div class="form-group">
-        <label for="rj45Terminated">RJ45's Terminated:</label>
-        <input type="number" id="rj45Terminated" value="0">
-      </div>
-      <div class="form-group">
-        <label for="totalCat5">Total CAT5 Lines in Unit:</label>
-        <input type="number" id="totalCat5" value="0">
-      </div>
-      <div class="form-group">
-        <label for="terminatedRoom">Add Terminated Room:</label>
-        <select id="terminatedRoom">
-          <option value="Lobby">Lobby</option>
-          <option value="Living Room">Living Room</option>
-          <option value="Bedroom">Bedroom</option>
-          <option value="Kitchen">Kitchen</option>
-          <option value="Other">Other</option>
-        </select>
-        <input type="text" id="terminatedRoomOther" placeholder="If Other, specify">
-        <input type="number" id="terminatedQty" placeholder="Quantity">
+    <section>
+      <h2>CAT5 Terminations</h2>
+      <label>RJ45's Terminated<input type="number" id="rj45Terminated" min="0" value="0"></label>
+      <label>Total CAT5 Lines in Unit<input type="number" id="totalCat5" min="0" value="0"></label>
+      <div class="terminated-rooms">
+        <label>Add Terminated Room
+          <select id="terminatedRoomSelect">
+            <option>Living Room</option>
+            <option>Bedroom</option>
+            <option>Kitchen</option>
+            <option>Den</option>
+            <option>Other</option>
+          </select>
+        </label>
+        <input id="terminatedRoomOther" placeholder="If Other, specify">
+        <input id="terminatedQty" type="number" min="1" placeholder="Qty">
         <button type="button" id="addRoom">Add Room</button>
+        <ul id="roomList" class="list"></ul>
       </div>
-      <ul id="roomList"></ul>
+    </section>
 
-      <!-- Panel Information -->
-      <h3>Panel Information</h3>
-      <div class="form-group">
-        <label for="floor">Floor:</label>
-        <input type="text" id="floor">
-      </div>
-      <div class="form-group">
-        <label for="panel">Panel:</label>
-        <input type="text" id="panel">
-      </div>
-      <div class="form-group">
-        <label for="port">Port:</label>
-        <input type="text" id="port">
-      </div>
+    <section>
+      <h2>Panel Info</h2>
+      <label>Floor<input id="floor"></label>
+      <label>Panel<input id="panel"></label>
+      <label>Port<input id="port"></label>
 
-      <!-- Fiber Meter -->
-      <h3>Fibre Meter Mark</h3>
-      <div class="form-group">
-        <label for="suiteValue">Suite (m):</label>
-        <input type="number" id="suiteValue" value="0">
-      </div>
-      <div class="form-group">
-        <label for="riserValue">Riser (m):</label>
-        <input type="number" id="riserValue" value="0">
-      </div>
-      <div class="form-group">
-        <label for="totalValue">Total (m):</label>
-        <input type="number" id="totalValue" readonly>
-      </div>
+      <h2>Fibre Meter Mark</h2>
+      <label>Suite (m)<input id="suiteValue" type="number" value="0"></label>
+      <label>Riser (m)<input id="riserValue" type="number" value="0"></label>
+      <label>Total (auto)<input id="totalValue" type="number" readonly></label>
       <button type="button" id="calculateRiser">Calculate Total</button>
 
-      <!-- Hub Stock -->
-      <div class="form-group">
-        <label for="hubStockLocation">Hub Stock Inventory:</label>
-        <input type="text" id="hubStockLocation">
-      </div>
+      <label>Hub Stock Inventory
+        <select id="hubStock">
+          <option>960 Lawrence Ave</option>
+          <option>2201 EG</option>
+          <option>35 Mowat</option>
+          <option>Other</option>
+        </select>
+      </label>
+    </section>
 
-      <!-- Material List -->
-      <h3>Material List</h3>
-      <div class="form-group">
-        <input type="text" id="materialCode" placeholder="Material Code">
-        <input type="number" id="materialQty" placeholder="Qty">
-        <button type="button" id="addMaterial">Add Material</button>
-      </div>
-      <ul id="materialList"></ul>
+    <section class="materials">
+      <h2>Material List</h2>
+      <label>Material
+        <select id="materialSelect">
+          <option>1002327: GPON Zhone 2424GN</option><option>1001087: Active-E zhone</option><option>1001199: 4 port GPON Zhone</option><option>1001204: 8 port GPON Zhone</option><option>1002324: XGS Zhone</option><option>1002344: Airties 4960x</option><option>1001554: SML TV Box</option><option>1002445: Zhone Mount (2424GN/XGS)</option><option>1000420: Zhone Mount (Old Zhone)</option><option>1002322: Fibre Jack</option><option>1001083: LC APC Connector</option><option>1000526: Heat Sleeve</option><option>1000289: RJ45 Connector</option><option>1001084: SC APC Connector</option><option>1000422: LC UPC 250/900</option><option>1000476: SC UPC</option><option>1001047: 2 port Face Plate</option><option>1001048: 4 Port Face Plate</option><option>1000520: White Wall Jack</option><option>1001049: Coax Connector</option><option>1000880: Power Pins</option><option>1000878: Fuses</option><option>1000882: Molex Connector</option><option>1000186: CAT5 - White</option><option>1000438: CAT5 - blue</option><option>1000254: 3ft CAT5 Patch Cable</option><option>1000497: 5ft CAT5 Patch Cable</option><option>1000253: 3ft CAT5 Patch Cable</option><option>1001198: 1 count Fibre Reel</option><option>1001208: Power Extension</option><option>1002388: APC APC Patches</option><option>1000501: Phone Dongles</option><option>NA: Power Cable</option><option>1000952: HDMI</option><option>1001079: APC Bulk heads</option><option>1000477: Alcohol wipes</option><option>1000020: Residential Fiber trays</option><option>1000176: Grommets</option><option>1001154: Fiber cleaner for LC</option><option>1001155: Fiber cleaner for SC</option><option>1000776: Electrical tape</option><option>1000627: Dry wall anchors</option><option>1000273: Baby tie wraps (black)</option><option>1000275: Medium tie wraps (black)</option><option>1000278: Large tie wraps (black)</option><option>1000268: Baby tie wraps (white)</option><option>1000270: Medium tie wraps (white)</option><option>1000272: Large tie wraps (white)</option><option>1000713: Cable lube (yellow 77)</option><option>1000137: Saddles (small)</option><option>1000136: Saddles (large)</option><option>1000535: Velcro</option><option>1000715: Screws (8, 3/4)</option><option>1000759: Self tapping screws (1 box)</option><option>1000711: Fire stop (blue)</option><option>1000741: 6mm tape (labeler)</option><option>NA: Paper towel</option><option>NA: Sharpie</option><option>NA: AA Batteries</option><option>NA: AAA Batteries</option><option>NA: CR2032 Battery (SML Remote)</option><option>NA: 9V Batteries</option><option>NA: Sanitizer</option><option>NA: Latex Gloves</option><option>NA: Uhaul Gloves</option><option>NA: Beanfield Stickers</option><option>NA: Booties</option><option>100471: Twine</option><option>NA: Beanfield tote bags</option>
+        </select>
+      </label>
+      <label>Qty<input id="materialQty" type="number" min="1" value="1"></label>
+      <button type="button" id="addMaterial">Add</button>
+      <ul id="materialList" class="list"></ul>
+    </section>
 
-      <button type="button" id="generateBtn">Generate Note</button>
-    </form>
+  </form>
 
-    <h2>Generated Note</h2>
-    <pre id="outputArea"></pre>
+  <div class="controls">
+    <button id="generateBtn" class="primary">Generate Note</button>
+    <button id="copyBtn">Copy Note</button>
   </div>
-  <script src="script.js"></script>
+
+  <section class="output">
+    <h2>Generated Note</h2>
+    <pre id="outputArea" class="output-box"></pre>
+  </section>
+</main>
+
+<script src="script.js"></script>
 </body>
 </html>

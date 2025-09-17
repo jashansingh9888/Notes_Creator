@@ -3,24 +3,28 @@ Outside Installer: {{outsideTech}}
 
 Tests completed: {{tests}}
 
-Zhone Location: {{zhoneLocation}}
-Zhone MAC: {{zhoneMAC}}
-Zhone Model: {{zhoneModel}}
+Zhone location : {{zhoneLocation}}
+Zhone MAC : {{zhoneMAC}}
+Zhone Model : {{zhoneModel}}
 
 Airties Location: {{airtiesLocation}}
-Airties MAC: {{airtiesMAC}}
-Airties Model: {{airtiesModel}}
+Airties MAC : {{airtiesMAC}}
+Airties Model : {{airtiesModel}}
 
-RJ45's Terminated: {{rj45Terminated}}
-Total CAT5 Lines in Unit: {{totalCat5}}
-Terminated Rooms: {{rooms}}
+{{terminatedPhrase}}
+
+Terminated Rooms:
+{{rooms}}
 
 Panel Information:
-Floor: {{floor}}, Panel: {{panel}}, Port: {{port}}
+{{panel}}
 
 Fibre Meter Mark:
-Suite = {{suiteValue}} m, Riser = {{riserValue}} m, Total = {{totalValue}} m
+Suite = {{suiteValue}} m, Riser = {{riserValue}} m, Total = {{totalValue}} metres
 
-Hub Stock Inventory: {{hubStockLocation}}
+Hub Stock Inventory:- {{hubStock}}
 
-Material List: {{materials}}
+Material list:-
+{{materials}}
+
+----
